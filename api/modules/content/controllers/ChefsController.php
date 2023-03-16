@@ -23,6 +23,7 @@ class ChefsController extends ActiveController
     protected function verbs(){
         return [
             'popular'=>['GET'],
+            'index'=>['GET'],
         ];
     }
 
