@@ -1,9 +1,10 @@
 # Env
 /.env
-
+/composer.lock
 # Composer
 /vendor
 composer.phar
+composer.lock
 
 # JS
 node_modules
