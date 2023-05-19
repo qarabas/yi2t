@@ -2,26 +2,23 @@
 
 namespace app\modules\content\models;
 
-use Yii;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "dishes".
+ * This is the model class for table "checks".
  *
  * @property int $id
- * @property string|null $name
- * @property string|null $description
  *
  * @property Orders[] $orders
  */
-class Dishes extends ActiveRecord
+class Checks extends ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'dishes';
+        return 'checks';
     }
 
     /**
@@ -29,9 +26,7 @@ class Dishes extends ActiveRecord
      */
     public function rules()
     {
-        return [
-            [['name', 'description'], 'string', 'max' => 255],
-        ];
+        return [];
     }
 
     /**
@@ -41,8 +36,6 @@ class Dishes extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
         ];
     }
 
@@ -53,13 +46,6 @@ class Dishes extends ActiveRecord
      */
     public function getOrders()
     {
-        return $this->hasMany(Orders::class, ['dish_id' => 'id']);
+        return $this->hasMany(Orders::class, ['check_id' => 'id']);
     }
-
-
-    static function getReadyDishes()
-    {
-        return self::find()->where(['is_ready' => true])->asArray()->all();
-    }
-
 }

@@ -2,25 +2,22 @@
 
 namespace api\modules\content\controllers;
 
+use api\modules\content\handlers\ResponseHandler;
 use app\modules\content\models\Dishes;
-use yii\rest\ActiveController;
-use yii\web\HttpException;
+use yii\rest\Controller;
 
-class DishesController extends ActiveController
+class DishesController extends Controller
 {
     public $modelClass = 'app\modules\content\models\Dishes';
-    public function actions(){
-        $actions = parent::actions();
-        unset($actions['create']);
-        unset($actions['update']);
-        unset($actions['delete']);
-        unset($actions['view']);
-        return $actions;
-    }
 
     protected function verbs(){
         return [
-            'index'=>['GET'],
+            'menu'=>['GET'],
         ];
+    }
+
+    public function actionMenu()
+    {
+        return ResponseHandler::createResponse(Dishes::getReadyDishes());
     }
 }

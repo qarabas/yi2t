@@ -2,20 +2,20 @@
 
 namespace app\modules\content\models;
 
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "orders".
  *
  * @property int $id
  * @property int|null $dish_id
- * @property int|null $chef_id
+ * @property int|null $check_id
  * @property int|null $created_at
  *
- * @property Chefs $chef
+ * @property Checks $check
  * @property Dishes $dish
  */
-class Orders extends \yii\db\ActiveRecord
+class Orders extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -31,11 +31,10 @@ class Orders extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['dish_id', 'order_number', 'chef_id', 'created_at'], 'default', 'value' => null],
-            [['dish_id', 'order_number', 'chef_id', 'created_at'], 'integer'],
-            [['dish_id', 'order_number', 'chef_id', 'created_at'], 'required'],
-            [['chef_id'], 'exist', 'skipOnError' => true, 'targetClass' => Chefs::class, 'targetAttribute' => ['chef_id' => 'id']],
-            [['dish_id'], 'exist', 'skipOnError' => true, 'targetClass' => Dishes::class, 'targetAttribute' => ['dish_id' => 'id']],
+            [['dish_id', 'check_id'], 'integer'],
+            [['dish_id', 'check_id'], 'required', 'message'=>'Please enter a value for {attribute}.'],
+            [['check_id'], 'exist', 'skipOnError' => true, 'targetClass' => Checks::class, 'targetAttribute' => ['check_id' => 'id'], 'message'=> 'Check doesn\'t exists'],
+            [['dish_id'], 'exist', 'skipOnError' => true, 'targetClass' => Dishes::class, 'targetAttribute' => ['dish_id' => 'id'], 'message'=> 'Dish doesn\'t exists'],
         ];
     }
 
@@ -46,21 +45,27 @@ class Orders extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'order_number' => 'Order Number',
             'dish_id' => 'Dish ID',
-            'chef_id' => 'Chef ID',
+            'check_id' => 'Check ID',
             'created_at' => 'Created At',
         ];
     }
 
+    public function beforeSave($insert)
+    {
+        $this->created_at = date('Ymd');
+        return parent::beforeSave($insert);
+    }
+
+
     /**
-     * Gets query for [[Chef]].
+     * Gets query for [[Check]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getChef()
+    public function getCheck()
     {
-        return $this->hasOne(Chefs::class, ['id' => 'chef_id']);
+        return $this->hasOne(Checks::class, ['id' => 'check_id']);
     }
 
     /**

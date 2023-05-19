@@ -27,7 +27,7 @@
     "source": "https://github.com/yii2-starter-kit/yii2-starter-kit"
   },
   "require": {
-    "php": ">=7.1.0",
+    "php": ">=8.0",
     "ext-intl": "*",
     "ext-gd": "*",
     "yiisoft/yii2": "^2.0.13",
@@ -57,7 +57,8 @@
     "himiklab/yii2-sitemap-module": "*",
     "yii2mod/yii2-swagger": "^1.1",
     "rmrevin/yii2-fontawesome": "^3.4",
-    "kartik-v/yii2-widgets": "^3.4"
+    "kartik-v/yii2-widgets": "^3.4",
+    "ext-http": "*"
   },
   "require-dev": {
     "yiisoft/yii2-gii": "^2.0.0",

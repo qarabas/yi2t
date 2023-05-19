@@ -3,18 +3,17 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%chefs}}`.
+ * Handles the creation of table `{{%checks}}`.
  */
-class m230316_102049_create_chefs_table extends Migration
+class m230519_012536_create_checks_table extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('{{%chefs}}', [
+        $this->createTable('{{%checks}}', [
             'id' => $this->primaryKey(),
-            'name' => $this->string()->unique(),
         ]);
     }
 
@@ -23,6 +22,6 @@ class m230316_102049_create_chefs_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%chefs}}');
+        $this->dropTable('{{%checks}}');
     }
 }

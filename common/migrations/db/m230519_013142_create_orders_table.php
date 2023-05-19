@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%orders}}`.
  */
-class m230316_102101_create_orders_table extends Migration
+class m230519_013142_create_orders_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -14,9 +14,8 @@ class m230316_102101_create_orders_table extends Migration
     {
         $this->createTable('{{%orders}}', [
             'id' => $this->primaryKey(),
-            'order_number' => $this->integer(),
-            'dish_id' => $this->integer(),
-            'chef_id' => $this->integer(),
+            'dish_id' => $this->integer()->notNull(),
+            'check_id' => $this->integer()->notNull(),
             'created_at' => $this->integer(),
         ]);
 
@@ -29,10 +28,10 @@ class m230316_102101_create_orders_table extends Migration
         );
 
         $this->addForeignKey(
-            'FK_orders_chef_id',
+            'FK_orders_check_id',
             '{{%orders}}',
-            'chef_id',
-            '{{%chefs}}',
+            'check_id',
+            '{{%checks}}',
             'id'
         );
     }
@@ -47,7 +46,7 @@ class m230316_102101_create_orders_table extends Migration
             '{{%orders}}');
 
         $this->dropForeignKey(
-            'FK_orders_chef_id',
+            'FK_orders_check_id',
             '{{%orders}}');
 
         $this->dropTable('{{%orders}}');

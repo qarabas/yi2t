@@ -2,7 +2,7 @@
 
 namespace app\modules\content\models;
 
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "chefs".
@@ -12,7 +12,7 @@ use Yii;
  *
  * @property Orders[] $orders
  */
-class Chefs extends \yii\db\ActiveRecord
+class Chefs extends ActiveRecord
 {
     /**
      * {@inheritdoc}
