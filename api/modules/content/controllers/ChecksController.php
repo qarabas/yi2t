@@ -2,6 +2,7 @@
 
 namespace api\modules\content\controllers;
 
+use api\modules\content\handlers\MainActions;
 use api\modules\content\handlers\ResponseHandler;
 use app\modules\content\models\Checks;
 use yii\rest\Controller;
@@ -21,10 +22,8 @@ class ChecksController extends Controller
     public function actionCreate()
     {
         $model = new Checks();
-        if ($model->save()){
-            return ResponseHandler::createResponse($model->toArray());
-        }else{
-            throw new HttpException(404,'error');
-        }
+        $abstractModel = new MainActions($model);
+        $abstractModel = $abstractModel->validateAndSave();
+        return ResponseHandler::createResponse(!empty($abstractModel) ? $abstractModel : ['error'], !empty($abstractModel) ? 200 : 404);
     }
 }

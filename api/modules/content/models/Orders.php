@@ -2,8 +2,6 @@
 
 namespace app\modules\content\models;
 
-use yii\db\ActiveRecord;
-
 /**
  * This is the model class for table "orders".
  *
@@ -15,7 +13,7 @@ use yii\db\ActiveRecord;
  * @property Checks $check
  * @property Dishes $dish
  */
-class Orders extends ActiveRecord
+class Orders extends BaseModel
 {
     /**
      * {@inheritdoc}

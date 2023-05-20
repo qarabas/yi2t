@@ -2,6 +2,7 @@
 
 namespace api\modules\content\controllers;
 
+use api\modules\content\handlers\MainActions;
 use api\modules\content\handlers\ResponseHandler;
 use app\modules\content\models\Orders;
 use Yii;
@@ -27,8 +28,8 @@ class OrdersController extends Controller
         $form = Yii::$app->request->post();
         $model = new Orders();
         $model->load($form, '');
-        $data = $model->validate() && $model->save() ?
-            $model->toArray() : $model->errors;
-        return ResponseHandler::createResponse($data);
+        $abstractModel = new MainActions($model);
+        $abstractModel = $abstractModel->validateAndSave();
+        return ResponseHandler::createResponse(!empty($abstractModel) ? $abstractModel : ['error'], !empty($abstractModel) ? 200 : 404);
     }
 }
