@@ -21,6 +21,7 @@ class ChecksController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new Checks();
         $abstractModel = new MainActions($model);
         $abstractModel = $abstractModel->validateAndSave();
